@@ -52,16 +52,6 @@ db.Workout.create({ name: "First Workout" })
 //     });
 // });
 
-app.get("/api/exercises", (req, res) => {
-  db.Exercise.find({})
-    .then(dbExercise => {
-      res.json(dbExercise);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
     .then(dbWorkout => {
@@ -72,19 +62,8 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 
-// app.get("/api/workouts/:workout", (req, res) => {
-//   db.Workout.findOne({})
-//     .then(dbWorkout => {
-//       res.json(dbWorkout);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-app.get("/populated", (req, res) => {
+app.post("/api/workouts", (req, res) => {
   db.Workout.find({})
-    .populate("exercises")
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -92,6 +71,44 @@ app.get("/populated", (req, res) => {
       res.json(err);
     });
 });
+
+app.put("/api/workouts/:workout", (req, res) => {
+  let id = req.params.id;
+  let data = req.body;
+  console.log("PUT:/api/workouts/" + id);
+
+  db.Workout.updateOne(
+    { id: db.Mongoose.Types.ObjectId(id) },
+    { $push: { exercises: data } }
+  )
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+app.get("/api/workouts/range", (req, res) => {
+  db.Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+// app.get("/populated", (req, res) => {
+//   db.Workout.find({})
+//     .populate("exercises")
+//     .then(dbWorkout => {
+//       res.json(dbWorkout);
+//     })
+//     .catch(err => {
+//       res.json(err);
+//     });
+// });
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
