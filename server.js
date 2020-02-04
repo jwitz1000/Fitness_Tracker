@@ -34,27 +34,10 @@ app.get("/stats", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/stats.html"));
 });
 
-// db.Workout.create({ name: "First Workout" })
-//   .then(dbWorkout => {
-//     console.log(dbWorkout);
-//   })
-//   .catch(({ message }) => {
-//     console.log(message);
-//   });
-
-// app.post("/submit", ({body}, res) => {
-//   db.Book.create(body)
-//     .then(({_id}) => db.Library.findOneAndUpdate({}, { $push: { books: _id } }, { new: true }))
-//     .then(dbLibrary => {
-//       res.json(dbLibrary);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
+// Api routes
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
+    .populate("exercises")
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -94,10 +77,11 @@ app.put("/api/workouts/:workout", (req, res) => {
   });
 });
 
-// range
 app.get("/api/workouts/range", (req, res) => {
   db.Workout.find({})
+    .populate("exercises")
     .then(dbWorkout => {
+      console.log(dbWorkout);
       res.json(dbWorkout);
     })
     .catch(err => {
@@ -105,6 +89,7 @@ app.get("/api/workouts/range", (req, res) => {
     });
 });
 
+// server listen
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });

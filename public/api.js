@@ -4,10 +4,10 @@ const API = {
     try {
       res = await fetch("/api/workouts");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
     const json = await res.json();
-
+    console.log(json);
     return json[json.length - 1];
   },
   async addExercise(data) {
@@ -40,5 +40,5 @@ const API = {
     const json = await res.json();
 
     return json;
-  },
+  }
 };
