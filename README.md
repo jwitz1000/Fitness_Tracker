@@ -11,7 +11,9 @@ An app that allows a user to create and track daily workouts. Exercise info such
 
 Pages are shown in full size and for mobile:
 
-![Image](assets/images/sc1.png)
+![Image](./images/sc1.png)
+<br>
+![Image](./images/sc2.png)
 <br>
 
 # Technologies
