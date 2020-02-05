@@ -9,10 +9,10 @@ An app that allows a user to create and track daily workouts. Exercise info such
 
 # Sample Images
 
-Pages are shown in full size and for mobile:
-
+Add workout page
 ![Image](./images/sc1.png)
 <br>
+Statistics page
 ![Image](./images/sc2.png)
 <br>
 
